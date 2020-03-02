@@ -1,7 +1,13 @@
 import React from 'react';
-import axios from 'axios';
+
 
 export default function DoctorAvailability(props) {
+
+  const onDuty = props.onDuty
+  console.log('ONDUTY: ', onDuty)
+
+  const available = onDuty.onDuty ? 'on duty' : 'off duty'
+
   return (
     <div className="DoctorAvailibility">
       <table>
@@ -13,20 +19,16 @@ export default function DoctorAvailability(props) {
         </thead>
         <tbody>
           <tr>
-            <td>{props.doctor}</td>
-            <td>{props.onDuty}</td>
-          </tr>
-          <tr>
-            <td>Body content 1</td>
-            <td>Body content 2</td>
+            {onDuty.map(doctor => {
+              return (
+                <div>
+                  <td>{doctor.doctor}</td>
+                  <td>{available}</td>
+                </div>
+              )
+            })}
           </tr>
         </tbody>
-        <tfoot>
-          <tr>
-            <td>Footer content 1</td>
-            <td>Footer content 2</td>
-          </tr>
-        </tfoot>
       </table>
     </div>
   )
