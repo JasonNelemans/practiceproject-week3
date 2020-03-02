@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 export default function Patient(props) {
   const [ click, setClick ] = useState();
   
@@ -9,7 +10,7 @@ export default function Patient(props) {
   }
 
   const display = click ? true : 'none'
-
+  
   return (
     <div className="Patient" style={{border: '3px solid black', margin: '5px'}}>
       <p>Name: {props.firstName} {props.lastName} </p>
