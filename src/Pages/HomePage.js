@@ -1,11 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import ContactDetails from '../Components/ContactDetails'
 
 export default function HomePage() {
   return (
     <div className="HomePage">
-      <NavLink to="/schedule" activeStyle={{fontWeight: "bold", color: "black"}} exact={true}><button>Doctor Schedule</button></NavLink>
-      <NavLink to="/signup" activeStyle={{fontWeight: "bold", color: "black"}} exact={true}><button>Patient Signup</button></NavLink>
+      <ContactDetails />
+      <NavLink to="/schedule" activeStyle={{fontWeight: "bold", color: "black"}} exact={true}><button>Who is on duty?</button></NavLink>
+      <br />
+      <br />
+      <NavLink to="/signup" activeStyle={{fontWeight: "bold", color: "black"}} exact={true}><button>I am a new patient</button></NavLink>
     </div>
   )
 }
