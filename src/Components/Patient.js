@@ -11,7 +11,7 @@ export default function Patient(props) {
   const display = click ? true : 'none'
 
   return (
-    <div className="Patient">
+    <div className="Patient" style={{border: '3px solid black', margin: '5px'}}>
       <p>Name: {props.firstName} {props.lastName} </p>
       <p>id: {props.id} </p>
       <p>date of birth: {props.dateOfBirth} </p>
