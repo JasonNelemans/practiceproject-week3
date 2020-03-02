@@ -6,10 +6,11 @@ function sortByName(patientA, patientB){
   return patientA.lastName.localeCompare(patientB.lastName)
 }
 
-
   export default function PatientDatabase() {
     const [ patientList, setPatientList ] = useState([]);
-    const [ loading, setLoading ] = useState()
+    const [ loading, setLoading ] = useState();
+    const [ sortBy, setSortBy ] = useState('all');
+    const [ doctor, setDoctor ] = useState()
     
     const fetchList = async () => {
       try {
@@ -28,15 +29,62 @@ function sortByName(patientA, patientB){
       fetchList();
     }, [])
 
+    const fetchDoctor = async () => {
+      try {
+        const response = await axios.get(
+          'https://my-json-server.typicode.com/Codaisseur/patient-doctor-data/doctors')
+          setDoctor(response.data)
+      }
+      catch (error) {
+        console.log('error: ', error.message)
+      }
+    }
+    // console.log('DOCTOR: ', doctor)
+
+    useEffect(() => {
+      fetchDoctor();
+    }, [])
+
     let sortedPatients = [...patientList].sort(sortByName)
 
+    const changeSorting = (event) => {
+      setSortBy(event.target.value)
+    }
 
+    let filterById;
+    if(sortBy === '1') {
+      filterById = sortedPatients.filter(value => {
+        return value.doctorId === 1
+      })
+    } else if (sortBy === '2') {
+      filterById = sortedPatients.filter(value => {
+        return value.doctorId === 2
+      })
+    } else if (sortBy === '3') {
+      filterById = sortedPatients.filter(value => {
+        return value.doctorId === 3
+      })
+    } else {
+      filterById = sortedPatients
+    }
+    
+    // console.log('FILTER BY ID: ', filterById)
+    // console.log('SortedPatients: ', sortedPatients)
+    
+    const renderedDoctor = doctor ? doctor : 'Dr.'
 
     return (
       <div className="PatientDatabase">
         <h2>Patient Database</h2>
+        <label><strong>Doctor</strong></label>
+        <select onChange={changeSorting}>
+          <option value="all">All</option>
+          <option value="1">{renderedDoctor[0].doctor}</option>
+          <option value="2">{renderedDoctor[1].doctor}</option>
+          <option value="3">{renderedDoctor[2].doctor}</option>
+        </select>
         <h3>{loading}</h3>
-        {sortedPatients.map(patient => {
+        {filterById.map(patient => {
           return (
             <Patient 
               firstName={patient.firstName}
