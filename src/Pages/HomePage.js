@@ -5,6 +5,7 @@ import ContactDetails from '../Components/ContactDetails'
 export default function HomePage() {
   return (
     <div className="HomePage">
+      <h1>Welcome to AMS GPs</h1>
       <ContactDetails />
       <NavLink to="/schedule" activeStyle={{fontWeight: "bold", color: "black"}} exact={true}><button>Who is on duty?</button></NavLink>
       <br />
