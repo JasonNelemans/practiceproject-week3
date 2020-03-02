@@ -39,15 +39,8 @@ export default function PatientSignup() {
     setAllData([{firstName, lastName, email, phone, gender, date}])
     setMessage('Thank you for submitting')
   } 
-  
-  
-  // console.log('FIRSTNAME: ', firstName,
-  // 'LASTNAME: ', lastName,
-  // 'EMAIL: ', email, 
-  // 'PHONE: ', phone,
-  // 'GENDER: ', gender, 
-  // 'DATE: ', date, 
-  // )
+  //How do I make this into an array which adds on top of it? setAllData([...allData, {newData}])
+
   console.log('Patient data: ' , allData)
   return (
     <div className="PatientSignup">
