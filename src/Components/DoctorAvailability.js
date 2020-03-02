@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import TableSchedule from '../Components/TableSchedule'
 
 
 export default function DoctorAvailability(props) {
+  const [ doctorDuty, setDoctorDuty ] = useState([])
+  
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        'https://my-json-server.typicode.com/Codaisseur/patient-doctor-data/doctors')
+        setDoctorDuty(response.data)
+    }
+    catch (error) {
+      console.log('error: ', error.message)
+    }
+  }
 
-  const onDuty = props.onDuty
-  console.log('ONDUTY: ', onDuty)
-
-  const available = onDuty.onDuty ? 'on duty' : 'off duty'
-
+  useEffect(() => {
+    fetchData()
+  }, [])
+  
+  console.log('DOCTORDUTY: ', doctorDuty)
+  // const available = onDuty.onDuty ? 'on duty' : 'off duty'
   return (
     <div className="DoctorAvailibility">
       <table>
@@ -18,16 +33,15 @@ export default function DoctorAvailability(props) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            {onDuty.map(doctor => {
+            {doctorDuty.map(each => {
               return (
-                <div>
-                  <td>{doctor.doctor}</td>
-                  <td>{available}</td>
-                </div>
+                <TableSchedule
+                  doctor={each.doctor}
+                  onDuty={each.onDuty}
+                  key={each.id}
+                />
               )
             })}
-          </tr>
         </tbody>
       </table>
     </div>
