@@ -4,12 +4,8 @@ export default function ContactDetails() {
 
   const today = new Date();
   const time = today.getHours()
-  let hours;
-  if(time > 8 && time < 17) {
-    hours = 'open';
-  } else {
-    hours = 'closed';
-  }
+
+  const hours = (time > 8 && time < 17) ? 'open' : 'closed'
 
   return (
     <div className="ContactDetails">
