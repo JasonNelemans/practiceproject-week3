@@ -39,36 +39,28 @@ function sortByName(patientA, patientB){
         console.log('error: ', error.message)
       }
     }
-    // console.log('DOCTOR: ', doctor)
-
+    
     useEffect(() => {
       fetchDoctor();
     }, [])
 
-    let sortedPatients = [...patientList].sort(sortByName)
-
+    
     const changeSorting = (event) => {
       setSortBy(event.target.value)
-    }
+    };
+    
+    let sortedPatients = [...patientList].sort(sortByName);
 
     let filterById;
-    if(sortBy === '1') {
-      filterById = sortedPatients.filter(value => {
-        return value.doctorId === 1
-      })
-    } else if (sortBy === '2') {
-      filterById = sortedPatients.filter(value => {
-        return value.doctorId === 2
-      })
-    } else if (sortBy === '3') {
-      filterById = sortedPatients.filter(value => {
-        return value.doctorId === 3
-      })
-    } else {
-      filterById = sortedPatients
-    }
+    filterById = sortedPatients.filter(patient => {
+      if(sortBy === 'all') {
+        return filterById = sortedPatients
+      } else {
+        return patient.doctorId === Number(sortBy)
+      }
+    });
     
-    const renderedDoctor = doctor ? doctor : []
+    const renderedDoctor = doctor || []
 
     return (
       <div className="PatientDatabase">
@@ -85,16 +77,9 @@ function sortByName(patientA, patientB){
         <h3>{loading}</h3>
         {filterById.map(patient => {
           return (
-            <Patient 
-              firstName={patient.firstName}
-              lastName={patient.lastName}
-              id={patient.id}
-              gender={patient.gender}
-              dateOfBirth={patient.dateOfBirth}
-              phoneNumber={patient.phoneNumber}
-              prescriptions={patient.prescriptions}
-              email={patient.email}
-              key={patient.id}
+            <Patient
+            {...patient}
+            key={patient.id}
             />
           )
         })}
