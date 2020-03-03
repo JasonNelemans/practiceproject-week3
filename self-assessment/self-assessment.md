@@ -5,4 +5,6 @@ I see I fetched the doctor’s data in two different components, I could have ea
 At the patient signup form, I feel like I have used the state way too many times, once for each input handler. This is something I can perhaps take another look at and come up with a better solution to make the logic denser and compact. 
 The sorting the patients with filter logic I used must have a more elegant and dynamic solution than the one I used. Now, with each new doctor, I will have to add a new else if statement. Also, the same with fetching the doctor names in the select option. I leave this as room for improvement in the clean up. 
 
-Self assessed points: 
+Self assessed points: 53
+
+I wonder how accurate. 
