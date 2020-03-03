@@ -39,36 +39,28 @@ function sortByName(patientA, patientB){
         console.log('error: ', error.message)
       }
     }
-    // console.log('DOCTOR: ', doctor)
-
+    
     useEffect(() => {
       fetchDoctor();
     }, [])
 
-    let sortedPatients = [...patientList].sort(sortByName)
-
+    
     const changeSorting = (event) => {
       setSortBy(event.target.value)
-    }
+    };
+    
+    let sortedPatients = [...patientList].sort(sortByName);
 
     let filterById;
-    if(sortBy === '1') {
-      filterById = sortedPatients.filter(value => {
-        return value.doctorId === 1
-      })
-    } else if (sortBy === '2') {
-      filterById = sortedPatients.filter(value => {
-        return value.doctorId === 2
-      })
-    } else if (sortBy === '3') {
-      filterById = sortedPatients.filter(value => {
-        return value.doctorId === 3
-      })
-    } else {
-      filterById = sortedPatients
-    }
+    filterById = sortedPatients.filter(patient => {
+      if(sortBy === 'all') {
+        return filterById = sortedPatients
+      } else {
+        return patient.doctorId === Number(sortBy)
+      }
+    });
     
-    const renderedDoctor = doctor ? doctor : 'Dr.'
+    const renderedDoctor = doctor || []
 
     return (
       <div className="PatientDatabase">
@@ -76,28 +68,18 @@ function sortByName(patientA, patientB){
         <label><strong>Doctor</strong></label>
         <select onChange={changeSorting}>
           <option value="all">All</option>
-          {/* {renderedDoctor.map(doctor => {
+          {renderedDoctor.map(doctor => {
             return (
-              <option value={doctor.doctorId}>{doctor.doctor}</option>
+              <option key={doctor.id} value={doctor.id}>{doctor.doctor}</option>
             )
-          })} */}
-          <option value="1">{renderedDoctor[0].doctor}</option>
-          <option value="2">{renderedDoctor[1].doctor}</option>
-          <option value="3">{renderedDoctor[2].doctor}</option>
+          })}
         </select>
         <h3>{loading}</h3>
         {filterById.map(patient => {
           return (
-            <Patient 
-              firstName={patient.firstName}
-              lastName={patient.lastName}
-              id={patient.id}
-              gender={patient.gender}
-              dateOfBirth={patient.dateOfBirth}
-              phoneNumber={patient.phoneNumber}
-              prescriptions={patient.prescriptions}
-              email={patient.email}
-              key={patient.id}
+            <Patient
+            {...patient}
+            key={patient.id}
             />
           )
         })}

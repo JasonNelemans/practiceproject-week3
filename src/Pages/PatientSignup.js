@@ -7,7 +7,7 @@ export default function PatientSignup() {
   const [ phone, setPhone ] = useState();
   const [ gender, setGender ] = useState();
   const [ date, setDate ] = useState();
-  const [ allData, setAllData ] = useState();
+  const [ allData, setAllData ] = useState([]);
   const [ message, setMessage ] = useState();
 
   const handleFirstName = (event) => {
@@ -36,10 +36,9 @@ export default function PatientSignup() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    setAllData([{firstName, lastName, email, phone, gender, date}])
+    setAllData([...allData, {firstName, lastName, email, phone, gender, date}])
     setMessage('Thank you for submitting')
   } 
-  //How do I make this into an array which adds on top of it? setAllData([...allData, {newData}])
 
   console.log('New Patient: ', allData)
   return (
