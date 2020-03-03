@@ -41,7 +41,7 @@ export default function PatientSignup() {
   } 
   //How do I make this into an array which adds on top of it? setAllData([...allData, {newData}])
 
-  console.log('Patient data: ' , allData)
+  console.log('New Patient: ', allData)
   return (
     <div className="PatientSignup">
       <h2>Patient signup</h2>

@@ -68,9 +68,6 @@ function sortByName(patientA, patientB){
       filterById = sortedPatients
     }
     
-    // console.log('FILTER BY ID: ', filterById)
-    // console.log('SortedPatients: ', sortedPatients)
-    
     const renderedDoctor = doctor ? doctor : 'Dr.'
 
     return (
@@ -79,6 +76,11 @@ function sortByName(patientA, patientB){
         <label><strong>Doctor</strong></label>
         <select onChange={changeSorting}>
           <option value="all">All</option>
+          {/* {renderedDoctor.map(doctor => {
+            return (
+              <option value={doctor.doctorId}>{doctor.doctor}</option>
+            )
+          })} */}
           <option value="1">{renderedDoctor[0].doctor}</option>
           <option value="2">{renderedDoctor[1].doctor}</option>
           <option value="3">{renderedDoctor[2].doctor}</option>
